@@ -94,3 +94,7 @@ int xr_post(int fd, struct uart_t *u, struct termios *ti);
 // add sprd init and post process for sprd Bluetooth chip (UWE5622)
 int sprd_config_init(int fd, struct uart_t *u, struct termios *ti);
 int sprd_config_post(int fd, struct uart_t *u, struct termios *ti);
+
+// add sprd init and post process for aic Bluetooth chip (AIC8800)
+int aic_config_init(int fd, struct uart_t *u, struct termios *ti);
+int aic_config_post(int fd, struct uart_t *u, struct termios *ti);

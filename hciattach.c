@@ -353,6 +353,19 @@ static int sprd_post(int fd, struct uart_t *u, struct termios *ti)
 	return sprd_config_post(fd, u, ti);
 }
 
+// add aic Bluetooth init and post function.
+static int aic_init(int fd, struct uart_t *u, struct termios *ti)
+{
+	fprintf(stderr, "AIC Bluetooth init uart with init speed:%d, final_speed:%d, type:HCI UART %s\n", u->init_speed, u->speed, (u->proto == HCI_UART_H4)? "H4":"H5" );
+	return aic_config_init(fd, u, ti);
+}
+
+static int aic_post(int fd, struct uart_t *u, struct termios *ti)
+{
+	fprintf(stderr, "AIC Bluetooth post process\n");
+	return aic_config_post(fd, u, ti);
+}
+
 static int read_check(int fd, void *buf, int count)
 {
 	int res;
@@ -1195,7 +1208,8 @@ struct uart_t uart[] = {
 //Realtek_add_end
 
 	{ "xradio",     0x0000, 0x0000, HCI_UART_H4, 115200, 1500000, 0, DISABLE_PM, NULL, xradio_init, xradio_post},
-	{  "sprd",      0x0000, 0x0000, NULL, 115200, 1500000, FLOW_CTL, DISABLE_PM, NULL, sprd_init, sprd_post},
+	{  "sprd",      0x0000, 0x0000, HCI_UART_H4, 115200, 1500000, FLOW_CTL, DISABLE_PM, NULL, sprd_init, sprd_post},
+	{  "aic",       0x0000, 0x0000, HCI_UART_H4, 115200, 1500000, FLOW_CTL, DISABLE_PM, NULL, aic_init, aic_post},
 
 	{ NULL, 0 }
 };

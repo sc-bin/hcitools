@@ -21,6 +21,7 @@ hciattach_objs = \
 	hciattach_tialt.o \
 	hciattach_rtk.o \
 	hciattach_xr.o \
+	hciattach_aic.o \
 	hciattach_sprd.o
 
 hciconfig_objs = \
@@ -50,6 +51,7 @@ btmon_objs = \
 .PHONY: all
 all: hciattach hciconfig hcitool btmon
 
+# define you target, the target will be output to dragonboard/output/bin
 # directory
 hciattach: $(hciattach_objs) $(lib)
 	$(LINK_MSG)
@@ -94,4 +96,4 @@ clean:
 	-rm -rf $(hcitool_objs) $(hcitool_objs:.o=.d)
 	-rm -rf $(lib) $(lib:.o=.d)
 	-rm -rf $(btmon_objs) $(btmon_objs:.o=.d)
-	#-rm -rf output
+
